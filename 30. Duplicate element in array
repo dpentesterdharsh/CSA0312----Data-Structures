@@ -1,0 +1,44 @@
+#include <stdio.h>
+
+// Function to find and print duplicate elements in the array
+void findDuplicates(int array[], int size) {
+    int foundDuplicate = 0;  // Flag to check if any duplicate is found
+
+    // Traverse the array with two loops to compare each pair of elements
+    for (int i = 0; i < size - 1; i++) {
+        for (int j = i + 1; j < size; j++) {
+            // If a duplicate is found
+            if (array[i] == array[j]) {
+                printf("Duplicate element: %d\n", array[i]);
+                foundDuplicate = 1;
+                break;  // No need to check further, go to next element
+            }
+        }
+    }
+
+    // If no duplicates were found
+    if (!foundDuplicate) {
+        printf("No duplicate elements found.\n");
+    }
+}
+
+int main() {
+    int n;
+
+    // Input: size of the array
+    printf("Enter the number of elements: ");
+    scanf("%d", &n);
+
+    int array[n];
+
+    // Input: elements of the array
+    printf("Enter the elements of the array:\n");
+    for (int i = 0; i < n; i++) {
+        scanf("%d", &array[i]);
+    }
+
+    // Function call to find duplicate elements
+    findDuplicates(array, n);
+
+    return 0;
+}
