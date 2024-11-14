@@ -1,0 +1,26 @@
+#include <stdio.h>
+
+// Function to print the multiplication table of a number
+void printMultiplicationTable(int num, int range) {
+    for (int i = 1; i <= range; i++) {
+        printf("%d x %d = %d\n", num, i, num * i);
+    }
+}
+
+int main() {
+    int number, range;
+
+    // Take input from the user
+    printf("Enter a number: ");
+    scanf("%d", &number);
+    
+    // Optional: Take the range (e.g., 10 by default)
+    printf("Enter the range (up to which number you want the table): ");
+    scanf("%d", &range);
+
+    // Print the multiplication table
+    printf("\nMultiplication table for %d:\n", number);
+    printMultiplicationTable(number, range);
+
+    return 0;
+}
