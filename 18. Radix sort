@@ -1,0 +1,76 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+// Function to get the digit at a particular place value (1s, 10s, 100s, etc.)
+int getDigit(int num, int place) {
+    return (num / place) % 10;
+}
+
+// Counting sort to sort the elements based on the current digit
+void countingSort(int array[], int size, int place) {
+    int output[size]; // Output array to store sorted numbers
+    int count[10] = {0}; // Count array to store the frequency of digits (0-9)
+
+    // Store the count of occurrences of each digit (0-9)
+    for (int i = 0; i < size; i++) {
+        int digit = getDigit(array[i], place);
+        count[digit]++;
+    }
+
+    // Change count[i] to store the actual position of this digit in output[]
+    for (int i = 1; i < 10; i++) {
+        count[i] += count[i - 1];
+    }
+
+    // Build the output array using the count array
+    for (int i = size - 1; i >= 0; i--) {
+        int digit = getDigit(array[i], place);
+        output[count[digit] - 1] = array[i];
+        count[digit]--;
+    }
+
+    // Copy the sorted elements from output[] to the original array[]
+    for (int i = 0; i < size; i++) {
+        array[i] = output[i];
+    }
+}
+
+// Function to perform Radix Sort
+void radixSort(int array[], int size) {
+    // Find the maximum number to determine the number of digits
+    int max = array[0];
+    for (int i = 1; i < size; i++) {
+        if (array[i] > max) {
+            max = array[i];
+        }
+    }
+
+    // Perform counting sort for every digit (place value)
+    // The place value starts from 1 (1s place) and moves to 10, 100, etc.
+    for (int place = 1; max / place > 0; place *= 10) {
+        countingSort(array, size, place);
+    }
+}
+
+// Function to print the array
+void printArray(int array[], int size) {
+    for (int i = 0; i < size; i++) {
+        printf("%d ", array[i]);
+    }
+    printf("\n");
+}
+
+int main() {
+    int array[] = {170, 45, 75, 90, 802, 24, 2, 66};
+    int n = sizeof(array) / sizeof(array[0]);
+
+    printf("Original array: \n");
+    printArray(array, n);
+
+    radixSort(array, n);
+
+    printf("Sorted array: \n");
+    printArray(array, n);
+
+    return 0;
+}
