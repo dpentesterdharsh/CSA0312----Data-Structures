@@ -1,0 +1,44 @@
+#include <stdio.h>
+
+// Function to find the maximum and minimum elements in the array
+void findMaxMin(int array[], int size, int* max, int* min) {
+    *max = array[0]; // Initialize max as the first element
+    *min = array[0]; // Initialize min as the first element
+
+    // Traverse the array and update max and min
+    for (int i = 1; i < size; i++) {
+        if (array[i] > *max) {
+            *max = array[i]; // Update max if a larger element is found
+        }
+        if (array[i] < *min) {
+            *min = array[i]; // Update min if a smaller element is found
+        }
+    }
+}
+
+int main() {
+    int n;
+
+    // Input: size of the array
+    printf("Enter the number of elements: ");
+    scanf("%d", &n);
+
+    int array[n];
+
+    // Input: elements of the array
+    printf("Enter the elements of the array:\n");
+    for (int i = 0; i < n; i++) {
+        scanf("%d", &array[i]);
+    }
+
+    int max, min;
+
+    // Function call to find the maximum and minimum elements
+    findMaxMin(array, n, &max, &min);
+
+    // Output: print the maximum and minimum elements
+    printf("Maximum element: %d\n", max);
+    printf("Minimum element: %d\n", min);
+
+    return 0;
+}
